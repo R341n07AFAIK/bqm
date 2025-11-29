@@ -1,0 +1,38 @@
+{
+  "name": "bh-project",
+  "version": "1.0.0",
+  "description": "BH surreal‑propaganda‑noir myth‑engine prompt system (CTSCE‑integrated).",
+  "main": "generate.js",
+  "scripts": {
+    "start": "node generate.js --generator=bh --world=BH --themes=bh_bureaucratic_shrine --styles=surreal-propaganda-noir",
+    "generate:bh": "node generate.js --generator=bh --world=BH --themes=bh_bureaucratic_shrine --styles=surreal-propaganda-noir",
+    "generate:grok": "node generate.js --generator=grok --world=BH --themes=bh_bureaucratic_shrine --styles=surreal-propaganda-noir --num=8",
+    "generate:rainbow": "node bin/generatePrompt.js --rainbow=true",
+    "lexicon:chat": "node lexicon_chat_gen.js --theme=pluto_silence --num=5 --output=json",
+    "export": "scripts/bh_export_full.sh",
+    "mj:convert": "node scripts/convert_to_midjourney.js",
+    "mj:upload": "node scripts/mj_batch_uploader.js",
+    "mj:upload:dry": "node scripts/mj_batch_uploader.js --dry",
+    "mj:export:zip": "node scripts/synth_to_batch.js",
+    "codex": "bash codex.sh",
+    "export:midjourney": "npm run export && npm run mj:convert",
+    "full:run": "npm run export && npm run mj:convert && npm run mj:export:zip && npm run codex"
+  },
+  "keywords": [
+    "BH",
+    "surreal-propaganda-noir",
+    "OIP",
+    "myth-engine",
+    "CTSCE",
+    "prompt-generator"
+  ],
+  "author": "Gh0STAR / S3V3N2",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "minimist": "^1.2.8",
+    "archiver": "^5.3.2"
+  }
+}

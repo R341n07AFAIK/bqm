@@ -1,0 +1,50 @@
+name: BH Export Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: {}
+
+jobs:
+  build-and-export:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run full BH pipeline
+        run: |
+          npm run full:run || echo "full:run failed, continue to artifact upload"
+
+      - name: List out/ and export/ (if present)
+        run: |
+          ls -R out || echo "no out/ directory"
+          ls -R export || echo "no export/ directory"
+
+      - name: Upload out/ artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bh-out
+          path: out
+          if-no-files-found: ignore
+
+      - name: Upload export/ archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: bh-export
+          path: export
+          if-no-files-found: ignore
