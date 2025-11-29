@@ -1,0 +1,15 @@
+{
+  "name": "bh-myth-engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BH myth-engine / CTSCE prompt and graphics generator bundle (reconstructed export).",
+  "main": "generate.js",
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.js",
+    "prompt": "node bin/generatePrompt.js"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
